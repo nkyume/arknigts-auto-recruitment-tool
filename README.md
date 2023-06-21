@@ -5,6 +5,8 @@ im using this something https://github.com/wesngu28/rhodesapi i dont know how to
 ---Version 0.3 pre pre alpha--- 
 
 Features: 
+
 -Can show minimal rarity of operators in combinations of tags. 
+
 -That all. 
  
