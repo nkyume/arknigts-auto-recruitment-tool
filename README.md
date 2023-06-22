@@ -3,7 +3,7 @@
 im using this something https://github.com/wesngu28/rhodesapi i dont know how to call it sorry, im new to coding
 
 ---Version 0.4---  
--Can take screenshot of tags
+-Can take screenshot of tags adn show operators that match that tags combinations
   
  
 ---Version 0.3---
