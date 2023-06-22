@@ -3,8 +3,8 @@
 im using this something https://github.com/wesngu28/rhodesapi i dont know how to call it sorry, im new to coding
 
 ---Version 0.4---  
--Can take screenshot of tags now
-
+-Can take screenshot of tags
+  
  
 ---Version 0.3---
 
