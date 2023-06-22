@@ -1,11 +1,11 @@
 import requests
 import itertools
-
-tags_from_screenshot = ["Sniper", "Survival", "Senior Operator", "Caster", "Ranged"]
+from tags_extractor import extract
 
 
 def main():
     operators = requests.get("https://rhodesapi.up.railway.app/api/operator").json()
+    tags_from_screenshot = extract(currently_available_tags(operators))
     operators = operator_sort(operators, tags_from_screenshot)
 
     # Create combinations of all tags
@@ -58,6 +58,15 @@ def tags_combinations(tags, times):
     return combination
 
 
+def currently_available_tags(operators: list):
+    tags = ["Top Operator", "Senior Operator", "Melee", "Ranged"]
+    for operator in operators:
+        for tag in operator["tags"]:
+            if tag not in tags:
+                tags.append(tag)
+    return tags
+
+
 def operator_sort(operators: list, desired_tags: list):
 
     """
@@ -94,4 +103,5 @@ def operator_sort(operators: list, desired_tags: list):
     return matched_operators
 
 
-main()
+if __name__ == "__main__":
+    main()
