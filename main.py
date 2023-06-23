@@ -31,6 +31,8 @@ def main():
     for combi in matched_operators:
         temp_rarity = 0
         for operator in combi["operators"]:
+            # If combination have 3* operators or higher, making min_rarity 3* or higher
+            # Since no one set recruitment time less than 8 hours (probably)
             if temp_rarity > 2 and operator["rarity"] > 2:
                 if operator["rarity"] < temp_rarity:
                     temp_rarity = operator["rarity"]
