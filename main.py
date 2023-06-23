@@ -6,7 +6,7 @@ from tags_extractor import extract
 def main():
     operators = requests.get("https://rhodesapi.up.railway.app/api/operator").json()
     tags_from_screenshot = extract(currently_available_tags(operators))
-    operators = operator_sort(operators, tags_from_screenshot)
+    operators = operator_sort(operators)
 
     # Create combinations of all tags
     screen_combi = tags_combinations(tags_from_screenshot, 3)
@@ -33,15 +33,15 @@ def main():
         for operator in combi["operators"]:
             if operator["rarity"] < combi["min_rarity"]:
                 combi["min_rarity"] = operator["rarity"]
-    matched_operators = sorted(matched_operators, key=lambda d: d["min_rarity"], reverse=True)
+    matched_operators = sorted(matched_operators, key=lambda d: d["min_rarity"], reverse=False)
 
     # Temp output
-    for combi in matched_operators:
+    for combi in reversed(matched_operators):
         print(f'{combi["min_rarity"]} stars, {combi["combination"]}: ', end="")
         for operator in combi["operators"]:
             if not combi["min_rarity"] == 6 and operator["rarity"] == 6:
                 continue
-            print(f" {operator['name']}", end="")
+            print(f" {operator['name']} {operator['rarity']}* |", end="")
         print()
 
 
@@ -67,40 +67,37 @@ def currently_available_tags(operators: list):
     return tags
 
 
-def operator_sort(operators: list, desired_tags: list):
+def operator_sort(operators: list):
 
     """
-    Function that return list of operator's names and tags
-    if their tags match with desired tags
+    Function  add positional and rarity tags to operators tag list
+    Returns list with recruitable operators
     """
 
-    matched_operators = []
+    ranged_classes = ["Medic", "Sniper", "Caster", "Decel Binder", "Bard", "Abjurer", "Summoner", "Tactician"]
+
+    recruitable_operators = []
 
     for operator in operators:
-        temp_dict = {}
-        temp_tag = set()
 
         if operator["recruitable"] == "No":
             continue
 
-        for tag in desired_tags:
-            if tag in operator["tags"]:
+        if operator["rarity"] == 6:
+            operator["tags"].append("Top Operator")
+        elif operator["rarity"] == 5:
+            operator["tags"].append("Senior Operator")
 
-                temp_tag.add(tag)
-                temp_dict["name"] = operator["name"]
-                temp_dict["rarity"] = operator["rarity"]
+        for class_name in operator["class"]:
+            if class_name in ranged_classes:
+                operator["tags"].append("Ranged")
+                break
+        else:
+            operator["tags"].append("Melee")
 
-                # Adding rarity tag since there no rarity tags on wiki page
-                if operator["rarity"] == 6:
-                    temp_tag.add("Top Operator")
-                elif operator["rarity"] == 5:
-                    temp_tag.add("Senior Operator")
+        recruitable_operators.append(operator)
 
-        if temp_dict:
-            temp_dict["tags"] = temp_tag
-            matched_operators.append(temp_dict)
-
-    return matched_operators
+    return recruitable_operators
 
 
 if __name__ == "__main__":
