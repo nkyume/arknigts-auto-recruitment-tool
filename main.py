@@ -29,14 +29,18 @@ def main():
 
     # Sort matched operators by minimum rarity
     for combi in matched_operators:
-        combi["min_rarity"] = 6
+        temp_rarity = 0
         for operator in combi["operators"]:
-            if operator["rarity"] < combi["min_rarity"]:
-                combi["min_rarity"] = operator["rarity"]
-    matched_operators = sorted(matched_operators, key=lambda d: d["min_rarity"], reverse=False)
+            if temp_rarity > 2 and operator["rarity"] > 2:
+                if operator["rarity"] < temp_rarity:
+                    temp_rarity = operator["rarity"]
+            elif temp_rarity <= 2:
+                temp_rarity = operator["rarity"]
+        combi["min_rarity"] = temp_rarity
+    matched_operators = sorted(matched_operators, key=lambda d: d["min_rarity"])
 
     # Temp output
-    for combi in reversed(matched_operators):
+    for combi in matched_operators:
         print(f'{combi["min_rarity"]} stars, {combi["combination"]}: ', end="")
         for operator in combi["operators"]:
             if not combi["min_rarity"] == 6 and operator["rarity"] == 6:
@@ -74,7 +78,7 @@ def operator_sort(operators: list):
     Returns list with recruitable operators
     """
 
-    ranged_classes = ["Medic", "Sniper", "Caster", "Decel Binder", "Bard", "Abjurer", "Summoner", "Tactician"]
+    ranged_classes = ["Medic", "Sniper", "Caster", "Decel Binder", "Bard", "Abjurer", "Summoner", "Tactician", "Hexer"]
 
     recruitable_operators = []
 
