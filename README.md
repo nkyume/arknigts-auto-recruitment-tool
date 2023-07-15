@@ -1,7 +1,12 @@
 # arknigts-screenshot-recruitment-tool v0.5
 ### I want to create a programm that tells which tags to choose via screenshot instead on picking tags on wiki.
-im using this something https://github.com/wesngu28/rhodesapi i dont know how to call it sorry, im new to coding
-  
+---Version 0.8---  
+-Program use it's own scrapper to take data from wiki
+-Working much faster.
+-Removed loop
+-Removed fancy colorful output
+
+
 ---Version 0.5---  
 -Fancy coloful console output  
 -Take screenshot of arknights tags every 5 seconds  
