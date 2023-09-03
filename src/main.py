@@ -53,10 +53,9 @@ def get_avalible_operators(combinatons, is_top_operator):
             continue
         operators = []
         min_rarity = 0
-        
-        # Get rid of 6* operators if no top tag
         raritys = []
         
+        # Get rid of 6* operators if no top tag
         for operator in operators_raw:
             if operator[1] == 6 and not is_top_operator:
                 continue
