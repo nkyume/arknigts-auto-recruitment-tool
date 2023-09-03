@@ -71,15 +71,15 @@ def get_avalible_operators(combinatons):
     
     for combi in combinatons:
         
-        combi = "%".join(combi)
+        combi = "%,".join(combi)
+        
         operators_raw = db.retrieve_operators_by_tags(f"%{combi}%")
-        combi = combi.replace('%', ', ')
+        combi = combi.replace('%,', ' ')
         if not operators_raw:
             continue
-        operators = []
-        min_rarity = 0
-        raritys = []
         
+        operators = []
+        raritys = []
         # Get rid of 6* operators if no top tag
         for operator in operators_raw:
             if operator[1] == 6 and not 'Top Operator' in combi:
