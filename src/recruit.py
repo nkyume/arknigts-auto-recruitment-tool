@@ -77,10 +77,10 @@ def get_avalible_operators(combinatons):
     
     for combi in combinatons:
         
-        combi = "%,".join(combi)
+        combi = "%|".join(combi)
         
-        operators_raw = db.retrieve_operators_by_tags(f"%{combi}%")
-        combi = combi.replace('%,', ' ')
+        operators_raw = db.retrieve_operators_by_tags(f"%|{combi}|%")
+        combi = combi.replace('|', ' ').replace('%', '')
         if not operators_raw:
             continue
         

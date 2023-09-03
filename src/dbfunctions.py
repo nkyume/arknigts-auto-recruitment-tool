@@ -94,8 +94,7 @@ def available_tags():
     
     result = []
     for i in range(len(tags)): 
-        result.append(tags[i][0])
-        
+        result.append(tags[i][0].replace('|', ""))
     return result
     
 

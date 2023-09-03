@@ -76,9 +76,16 @@ def get_operator_tags(url):
     
     for tag in raw_tags:
         tags.append(tag.text.strip())
+    
+    separated_tags = []
+    for tag in tags:
+        tag = tag_separate(tag)
+        separated_tags.append(tag)
           
-    return tags
+    return separated_tags
 
+def tag_separate(tag):
+    return f"|{tag}|"
 
 def make_soup(url):
     for i in range(5):
