@@ -2,16 +2,12 @@ from PIL import Image
 import io
 import sqlite3
 
-conn = sqlite3.connect("operators.db")
-cur = conn.cursor()
+raritys = [1, 2, 3, 4, 4, 4, 4]
 
-cur.execute("""SELECT name, rarity, img FROM operators WHERE name = 'Melantha'""")
+print(set(raritys))
 
-name, rarity, img_data = cur.fetchone()
-
-file = io.BytesIO(img_data)
-img = Image.open(file)
-img.show()
-print(name, rarity)
+raritys = [2, 2, 2, 2]
+if set(raritys):
+    print(2)
 
 

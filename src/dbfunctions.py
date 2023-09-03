@@ -3,6 +3,8 @@ from sqlite3 import Error
 
 def add_to_db(id, name, rarity, tags, img):
     
+    """Add operator in database"""
+    
     conn = create_connection("operators.db")
     cur = conn.cursor()
     
@@ -29,6 +31,9 @@ def add_to_db(id, name, rarity, tags, img):
 
 
 def create_tables():
+    
+    """Create tables if not exists"""
+    
     conn = create_connection("operators.db")
     cur = conn.cursor()
     
@@ -53,9 +58,7 @@ def create_tables():
     cur.execute("""
                 CREATE TABLE IF NOT EXISTS tags (
                 name TEXT NOT NULL UNIQUE,
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                FOREIGN KEY (id) 
-                    REFERENCES operator_tag (tag_id)
+                id INTEGER PRIMARY KEY AUTOINCREMENT
                 )""")
     
     conn.commit()
@@ -63,6 +66,9 @@ def create_tables():
 
 
 def exist_in_db(id):
+    
+    """Return True if operator in db"""
+    
     conn = create_connection("operators.db")
     cur = conn.cursor()
     
@@ -76,6 +82,9 @@ def exist_in_db(id):
     
     
 def available_tags():
+    
+    """Returns list of all tags in db"""
+    
     conn = create_connection("operators.db")
     cur = conn.cursor()
     
@@ -90,7 +99,7 @@ def available_tags():
     return result
     
 
-def retrive_operators_by_tags(tags):
+def retrieve_operators_by_tags(tags):
     conn = create_connection("operators.db")
     cur = conn.cursor()
     
