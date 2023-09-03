@@ -3,7 +3,19 @@ from time import sleep
 import dbfunctions as db
 from tags_extractor import extract
 from scrapper import update_operators_data
+import os
 
+colors = {
+        'white': '\033[1;37m',
+        'green': '\033[0;32m',
+        'blue': '\033[0;34m',
+        'grey': '\033[0;37m',
+        'yellow': '\033[1;33m',
+        'orange': '\033[38;5;208m',
+        'pink': '\033[38;5;218m',
+        'purple': '\033[0;35m',
+        'nocolor': '\33[0m'
+        }
 
 def main():
     if input('Update operators list? (y/n): ') == 'y':
@@ -12,34 +24,47 @@ def main():
     while True:
         is_top_operator = False 
         tags = extract(db.available_tags(), "BlueStacks App Player")
-        
         # Flag for Top Operator tag
         if "Top Operator" in tags:
-            top_operator = True
+            is_top_operator = True
             
         combinatons = combine_tags(tags, 3)
         avalible_operators = sorted(get_avalible_operators(combinatons, is_top_operator), key=lambda d: d["combination_min_rarity"])
-        avalible_operators.reverse()
         
-        for tag_combintaion in avalible_operators:
-            print(tag_combintaion['combination'], tag_combintaion['combination_min_rarity'],)
-        # Temp output
-        """ for combi in combinatons:
+        # Console output
+        for tag_combination in avalible_operators:
+            tags_color = color_set(tag_combination['combination_min_rarity'])
+            print(f"{tags_color}{tag_combination['combination_min_rarity']}* {tag_combination['combination']}{colors['nocolor']}")
             
-            tmp = "%".join(combi)
-            operators = db.retrieve_operators_by_tags(f"%{tmp}%")
-            
-            if operators:
-                print(f"--{}--")
-                
-                for operator in operators:
-                    if not top_operator and operator[1] == 6:
-                        continue
-                    
-                    print(f"{operator[0]} {operator[1]}* | ", end="")
-                print("\n")
-         """
+            for operator in tag_combination['operators']:
+                if operator['name'] == 'Melantha':
+                    operator_color = colors['purple']
+                else:
+                    operator_color = color_set(operator['rarity'])
+                print(f"{operator_color}{operator['name']} {operator['rarity']}* | {colors['nocolor']}", end="")    
+            print("\n")  
+             
         sleep(5)
+    
+      
+def color_set(rarity):   
+    color = None
+    match rarity:
+        case 1:
+            color = colors['grey']
+        case 2:
+            color = colors['green']
+        case 3:
+            color = colors['blue']
+        case 4:
+            color = colors['pink']
+        case 5:
+            color = colors['yellow']
+        case 6:
+            color = colors['orange']
+        case _:
+            color = colors['white']
+    return color
 
 
 def get_avalible_operators(combinatons, is_top_operator):
@@ -90,6 +115,7 @@ def get_avalible_operators(combinatons, is_top_operator):
           
         avalible_operators.append(tmp_tags)
     return avalible_operators    
+
                  
 def combine_tags(tags, times):
     """
