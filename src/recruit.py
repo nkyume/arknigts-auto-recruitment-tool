@@ -108,10 +108,13 @@ def get_avalible_operators(combinatons):
         elif set(raritys) == {6}:
             min_rarity = 6
         else:
+            tmp_raritys = []
             for rarity in raritys:
-                if rarity < 2:
-                    raritys.remove(rarity)
+                if not rarity < 2:
+                    tmp_raritys.append(rarity)
+            raritys = tmp_raritys
             min_rarity = min(raritys)
+            print(raritys)
             
         tmp_tags = {
             'combination': combi,
