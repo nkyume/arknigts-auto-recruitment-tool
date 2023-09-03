@@ -114,7 +114,6 @@ def get_avalible_operators(combinatons):
                     tmp_raritys.append(rarity)
             raritys = tmp_raritys
             min_rarity = min(raritys)
-            print(raritys)
             
         tmp_tags = {
             'combination': combi,
