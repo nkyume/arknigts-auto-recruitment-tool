@@ -7,13 +7,13 @@ import os
 
 colors = {
         'white': '\033[1;37m',
-        'green': '\033[0;32m',
-        'blue': '\033[0;34m',
-        'grey': '\033[0;37m',
-        'yellow': '\033[1;33m',
+        'green': '\033[38;5;40m',
+        'blue': '\033[38;5;45m',
+        'grey': '\033[38;5;240m',
+        'yellow': '\033[38;5;226m',
         'orange': '\033[38;5;208m',
         'pink': '\033[38;5;218m',
-        'purple': '\033[0;35m',
+        'purple': '\033[38;5;135m',
         'nocolor': '\33[0m'
         }
 
@@ -41,9 +41,8 @@ def main():
                     operator_color = colors['purple']
                 else:
                     operator_color = color_set(operator['rarity'])
-                print(f"{operator_color}{operator['name']} {operator['rarity']}* | {colors['nocolor']}", end="")    
-            print("\n")  
-             
+                print(f"{operator_color}{operator['name']} {operator['rarity']}* {colors['nocolor']} | ", end="")    
+            print('\n', '-'*20)    
         sleep(5)
     
       
