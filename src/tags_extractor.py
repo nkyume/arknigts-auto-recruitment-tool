@@ -23,19 +23,20 @@ def extract(available_tags, window_name):
     bot_y = y + height * 0.7
 
     screenshot = ImageGrab.grab(bbox=(top_x, top_y, bot_x, bot_y), all_screens=True)
-    screenshot.save("tmp/tags.png")
+    screenshot.save("tags.png")
 
     reader = easyocr.Reader(["en"])
-    result = reader.readtext("tmp/tags.png")
+    result = reader.readtext("tags.png")
     tags = []
+    if not result:
+        print("Error. Make sure the arknights window is active.")
+        return []
     for tag in result:
         if not tag or not tag[1] in available_tags:
-            print(tag[1])
-            print("Can't recognize tags, make sure that arknights window is active")
+            print("Error. Make sure the arknights window is active.")
             return []
-
         tags.append(tag[1])
 
-    os.remove("tmp/tags.png")
+    os.remove("tags.png")
 
     return tags

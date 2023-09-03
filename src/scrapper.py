@@ -15,11 +15,11 @@ def update_operators_data():
     db.create_tables()
     missing_operators_id = get_missing_operators_id(data)
     
-    missing = len(missing_operators_id)
+    #missing = len(missing_operators_id)
     
     # Count operators to look cool.
     count = 0
-    print(f"Found {missing} potentialy operators")
+    #print(f"Found {missing} potentialy operators")
     
     for operator in tqdm(data, unit='operator'):
     

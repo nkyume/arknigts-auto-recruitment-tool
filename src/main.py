@@ -4,6 +4,8 @@ import dbfunctions as db
 from tags_extractor import extract
 from scrapper import update_operators_data
 import sys
+import configparser 
+import os
 
 colors = {
         'white': '\033[1;37m',
@@ -21,10 +23,10 @@ def main():
     try:
         if input('Update operators list? (y/n): ') == 'y':
             update_operators_data()
-        
+        window_name, sleep_time = read_config_file()
         while True: 
-            tags = extract(db.available_tags(), "BlueStacks App Player")
-                
+            tags = extract(db.available_tags(), window_name)
+            cls()
             combinatons = combine_tags(tags, 3)
             avalible_operators = sorted(get_avalible_operators(combinatons), key=lambda d: d["combination_min_rarity"])
             
@@ -40,7 +42,7 @@ def main():
                         operator_color = color_set(operator['rarity'])
                     print(f"{operator_color}{operator['name']} {operator['rarity']}* {colors['nocolor']} | ", end="")    
                 print('\n', '-'*20)    
-            sleep(5)
+            sleep(sleep_time)
             
     except KeyboardInterrupt:
         sys.exit()
@@ -129,6 +131,16 @@ def combine_tags(tags, times):
     return combination
 
 
+def read_config_file():
+    config = configparser.ConfigParser()
+    config.read("settings.ini")
+    return config['Settings']['window_name'], int(config['Settings']['sleep_time'])
+
+
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
+    
+       
 if __name__ == "__main__":
     main()
     
