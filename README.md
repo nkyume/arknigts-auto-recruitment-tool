@@ -1,4 +1,4 @@
-# arknigts-screenshot-recruitment-tool v0.5
+# arknigts-screenshot-recruitment-tool  
 ### I want to create a programm that tells which tags to choose via screenshot instead on picking tags on wiki.
 ---Version 0.8---  
 -Program use it's own scrapper to take data from wiki  
