@@ -110,7 +110,7 @@ def get_avalible_operators(combinatons):
         else:
             tmp_raritys = []
             for rarity in raritys:
-                if not rarity < 2:
+                if not rarity < 3:
                     tmp_raritys.append(rarity)
             raritys = tmp_raritys
             min_rarity = min(raritys)
