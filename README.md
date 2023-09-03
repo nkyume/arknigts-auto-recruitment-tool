@@ -1,5 +1,5 @@
 # arknigts-screenshot-recruitment-tool  
-v0.9  
+v0.9.1  
 https://drive.google.com/file/d/1Kye8POGCuY7eoKhjfS1v3-t4dI9G3ycq/view?usp=sharing  
   
 Features:  
