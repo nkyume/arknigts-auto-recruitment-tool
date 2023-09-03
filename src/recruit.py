@@ -21,11 +21,15 @@ colors = {
 
 def main():
     try:
-        if input('Update operators list? (y/n): ') == 'y':
+        if input('Update operators db? (y/n): ').lower() == 'y':
             update_operators_data()
         window_name, sleep_time = read_config_file()
         while True: 
             tags = extract(db.available_tags(), window_name)
+            
+            if not tags:
+                continue
+            
             cls()
             combinatons = combine_tags(tags, 3)
             avalible_operators = sorted(get_avalible_operators(combinatons), key=lambda d: d["combination_min_rarity"])
@@ -104,10 +108,11 @@ def get_avalible_operators(combinatons):
         elif set(raritys) == {6}:
             min_rarity = 6
         else:
+            for rarity in raritys:
+                if rarity < 2:
+                    raritys.remove(rarity)
             min_rarity = min(raritys)
-            if min_rarity < 3:
-                min_rarity = 3
-
+            
         tmp_tags = {
             'combination': combi,
             'combination_min_rarity': min_rarity,

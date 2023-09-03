@@ -1,6 +1,6 @@
 import pygetwindow as gw
 from PIL import ImageGrab
-import easyocr
+from easyocr import Reader
 import os
 
 
@@ -25,7 +25,7 @@ def extract(available_tags, window_name):
     screenshot = ImageGrab.grab(bbox=(top_x, top_y, bot_x, bot_y), all_screens=True)
     screenshot.save("tags.png")
 
-    reader = easyocr.Reader(["en"])
+    reader = Reader(["en"])
     result = reader.readtext("tags.png")
     tags = []
     if not result:

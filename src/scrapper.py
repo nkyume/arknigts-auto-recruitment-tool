@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-from time import sleep
 import dbfunctions as db
 from tqdm import tqdm
 
