@@ -19,6 +19,7 @@ def main():
             
         combinatons = combine_tags(tags, 3)
         avalible_operators = sorted(get_avalible_operators(combinatons, is_top_operator), key=lambda d: d["combination_min_rarity"])
+        avalible_operators.reverse()
         
         for tag_combintaion in avalible_operators:
             print(tag_combintaion['combination'], tag_combintaion['combination_min_rarity'],)
