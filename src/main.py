@@ -22,15 +22,11 @@ def main():
         if input('Update operators list? (y/n): ') == 'y':
             update_operators_data()
         
-        while True:
-            is_top_operator = False 
+        while True: 
             tags = extract(db.available_tags(), "BlueStacks App Player")
-            # Flag for Top Operator tag
-            if "Top Operator" in tags:
-                is_top_operator = True
                 
             combinatons = combine_tags(tags, 3)
-            avalible_operators = sorted(get_avalible_operators(combinatons, is_top_operator), key=lambda d: d["combination_min_rarity"])
+            avalible_operators = sorted(get_avalible_operators(combinatons), key=lambda d: d["combination_min_rarity"])
             
             # Console output
             for tag_combination in avalible_operators:
@@ -49,8 +45,7 @@ def main():
     except KeyboardInterrupt:
         sys.exit()
         
-    
-      
+         
 def color_set(rarity):   
     color = None
     match rarity:
@@ -71,7 +66,7 @@ def color_set(rarity):
     return color
 
 
-def get_avalible_operators(combinatons, is_top_operator):
+def get_avalible_operators(combinatons):
     avalible_operators = []
     
     for combi in combinatons:
@@ -87,7 +82,7 @@ def get_avalible_operators(combinatons, is_top_operator):
         
         # Get rid of 6* operators if no top tag
         for operator in operators_raw:
-            if operator[1] == 6 and not is_top_operator:
+            if operator[1] == 6 and not 'Top Operator' in combi:
                 continue
             
             tmp_operator = {
