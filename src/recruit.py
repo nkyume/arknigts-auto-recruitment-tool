@@ -21,8 +21,8 @@ colors = {
 
 def main():
     try:
-        if input('Update operators db? (y/n): ').lower() == 'y':
-            update_operators_data()
+        """ if input('Update operators db? (y/n): ').lower() == 'y':
+            update_operators_data() """
         window_name, sleep_time = read_config_file()
         while True: 
             tags = extract(db.available_tags(), window_name)
@@ -76,9 +76,7 @@ def get_avalible_operators(combinatons):
     avalible_operators = []
     
     for combi in combinatons:
-        
         combi = "%|".join(combi)
-        
         operators_raw = db.retrieve_operators_by_tags(f"%|{combi}|%")
         combi = combi.replace('|', ' ').replace('%', '')
         if not operators_raw:

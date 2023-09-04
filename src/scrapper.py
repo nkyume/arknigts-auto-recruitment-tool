@@ -43,9 +43,9 @@ def update_operators_data():
             
             # Rarity tags.
             if operator_rarity == "6":
-                operator_tags.append("Top Operator")
+                operator_tags.append("|Top Operator|")
             elif operator_rarity == "5":
-                operator_tags.append("Senior Operator")
+                operator_tags.append("|Senior Operator|")
             
             print()
             
