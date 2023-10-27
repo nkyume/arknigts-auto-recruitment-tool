@@ -32,10 +32,12 @@ def extract(available_tags, window_name):
         print("Error. Make sure the arknights window is active.")
         return []
     for tag in result:
-        if not tag or not tag[1] in available_tags:
+        if tag:
+            tag = tag[1].replace(",","").replace(".","").strip()
+        elif not tag or not tag in available_tags:
             print("Error. Make sure the arknights window is active.")
             return []
-        tags.append(tag[1])
+        tags.append(tag)
 
     os.remove("tags.png")
 

@@ -1,12 +1,15 @@
 import itertools
-from time import sleep
+import os
+import sys
+
+import configparser 
 import dbfunctions as db
 from tags_extractor import extract
 from scrapper import update_operators_data
-import sys
-import configparser 
-import os
 
+
+
+from time import sleep
 colors = {
         'white': '\033[1;37m',
         'green': '\033[38;5;28m',
@@ -21,8 +24,7 @@ colors = {
 
 def main():
     try:
-        """ if input('Update operators db? (y/n): ').lower() == 'y':
-            update_operators_data() """
+        update_operators_data()
         window_name, sleep_time = read_config_file()
         while True: 
             tags = extract(db.available_tags(), window_name)

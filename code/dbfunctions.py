@@ -65,20 +65,21 @@ def create_tables():
     cur.close
 
 
-def exist_in_db(id):
+def exist_in_db(name):
     
     """Return True if operator in db"""
     
     conn = create_connection("operators.db")
     cur = conn.cursor()
     
-    cur.execute("""SELECT * FROM operators WHERE id = ?""", (id,))
+    cur.execute("""SELECT * FROM operators WHERE name = ?""", (name,))
     
     if cur.fetchone():
         conn.close
         return True
     
     conn.close()
+    return False
     
     
 def available_tags():
