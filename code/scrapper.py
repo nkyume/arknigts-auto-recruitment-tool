@@ -112,6 +112,7 @@ def get_missing_operators():
 
     return operators
 
+
 if __name__ == "__main__":
     update_operators_data()
         
