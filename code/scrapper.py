@@ -18,7 +18,7 @@ def update_operators_data():
     
     # Count operators to look cool.
     # count = 0
-    print(f"Found {len(missing_operators)} n  operators")
+    print(f"Found {len(missing_operators)} operators")
     
     for operator in tqdm(data, unit='operator'):
     
@@ -112,7 +112,8 @@ def get_missing_operators():
 
     return operators
 
-update_operators_data()
+if __name__ = "__main__":
+    update_operators_data()
         
 
 
